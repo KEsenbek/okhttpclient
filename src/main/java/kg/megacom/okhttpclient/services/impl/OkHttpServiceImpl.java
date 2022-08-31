@@ -18,7 +18,7 @@ public class OkHttpServiceImpl implements OkHttpService {
     @Override
     public Object test() {
         Account account = new Account();
-
+        account.setId(123l);
         account.setLogin("user");
         account.setPassword("1234");
         account.setActive(true);
@@ -28,8 +28,10 @@ public class OkHttpServiceImpl implements OkHttpService {
             RequestBody body = RequestBody.create(MediaType.parse("application/json"),objectMapper.writeValueAsBytes(account));
 
             Request request = new Request.Builder()
-                    .url("http://localhost:8080/save")
-                    .post(body)
+                    .url("http://localhost:8080/update")
+                   //.url("http://localhost:8080/save")
+                    .put(body)
+                    //.post(body)
                     .build();
             Response response = client.newCall(request).execute();
 
